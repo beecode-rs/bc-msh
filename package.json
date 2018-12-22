@@ -1,0 +1,45 @@
+{
+  "author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (http://milos.bugarinovic.com)",
+  "bin": {
+    "msh": "./bin/msh.js"
+  },
+  "dependencies": {
+    "async-shelljs": "0.1.2",
+    "chalk": "2.4.1",
+    "dotenv": "6.2.0",
+    "inquirer": "6.2.1",
+    "lodash": "4.17.11",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.5",
+    "shelljs": "0.8.3"
+  },
+  "description": "MicroService Shell helper",
+  "devDependencies": {
+    "@types/chalk": "2.2.0",
+    "@types/dotenv": "6.1.0",
+    "@types/inquirer": "0.0.43",
+    "@types/lodash": "4.14.119",
+    "@types/request": "2.48.1",
+    "@types/shelljs": "0.8.1",
+    "app-module-path": "2.2.0",
+    "prettier": "1.15.3",
+    "ts-node": "7.0.1",
+    "typescript": "3.2.2"
+  },
+  "license": "Apache-2.0",
+  "main": "./src",
+  "name": "bc-msh",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:beecode-rs/bc-msh.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "debug": "node --inspect -r ts-node/register ./src/index.ts",
+    "start": "ts-node ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w"
+  },
+  "version": "0.0.1"
+}
