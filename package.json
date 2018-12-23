@@ -3,7 +3,11 @@
   "bin": {
     "msh": "./bin/msh.js"
   },
+  "bugs": {
+    "url": "https://github.com/beecode-rs/bc-msh/issues"
+  },
   "dependencies": {
+    "app-module-path": "2.2.0",
     "async-shelljs": "0.1.2",
     "chalk": "2.4.1",
     "dotenv": "6.2.0",
@@ -21,18 +25,24 @@
     "@types/lodash": "4.14.119",
     "@types/request": "2.48.1",
     "@types/shelljs": "0.8.1",
-    "app-module-path": "2.2.0",
     "prettier": "1.15.3",
     "ts-node": "7.0.1",
     "typescript": "3.2.2"
   },
+  "homepage": "https://github.com/beecode-rs/bc-msh#readme",
+  "keywords": [
+    "shell",
+    "microservice",
+    "management",
+    "project"
+  ],
   "license": "Apache-2.0",
   "main": "./src",
-  "name": "bc-msh",
+  "name": "@beecode/bc-msh",
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:beecode-rs/bc-msh.git"
+    "url": "git+ssh://git@github.com/beecode-rs/bc-msh.git"
   },
   "scripts": {
     "build": "tsc",
