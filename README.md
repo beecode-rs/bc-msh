@@ -17,7 +17,7 @@ First feature added was the git bach commands and it was used to easily and quic
 
 We chose to have a prefix for every project which takes first letters of the projects name `Simple Project` => `sp`, so for authentication microservice we get `sp-auth`. But when we clone it strip the prefix.
 
-#Configuration
+# Configuration
 
 configuration is stored in the file `.msh` located at the root of your project.
 ```dotenv
@@ -36,7 +36,7 @@ GIT_USERNAME=gituser@mail.com
 # Features
 
 * [git](#git)
-  * [status](#git.status)
+  * [status](#status)
   * [fetch](#fetch)
   * [pull](#pull)
   * [clone](#clone)
@@ -51,38 +51,38 @@ GIT_USERNAME=gituser@mail.com
   * [unix](#unix)
 * [pull request](#pull-request)
 
-### git
+## git
 Perform git commands on all project specified in `.mas` config file under `PROJECTS`. All commands are executed asynchronously.
 
-##### status
+### status
 Get git status for all microservice projects
 
-##### fetch
+### fetch
 Perform git fetch for all microservice projects
 
-##### pull
+### pull
 Perform git pull for all microservice projects
 
-##### clone
+### clone
 Clone all microservice projects. If `GIT_PROJECT_PREFIX` is set the project prefix is going to be striped for all projects.
 
-### clean
+## clean
 Removes files, folder and docker images.
 
-##### npm
+### npm
 Remove `node_modules` folder from microservice projects.
 
-##### docker images
+### docker images
 Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` list
 
-### npm install
+## npm install
 
-##### locally
+### locally
 Run `npm i` in all project folders listed in `PROJECTS`.
 
 TODO we need to change this to use `npm i --only=dev` so we would only install packages from devDependencies for IDE.
 
-##### in docker
+### in docker
 Run `npm i` in all containers. Uses `docker-compose.tty.yml`
 
 ```yaml
@@ -103,15 +103,15 @@ Run `npm i` in all containers. Uses `docker-compose.tty.yml`
 ```
 TODO check if `tty.yml` is needed
 
-### npm prepare
+## npm prepare
 If we use `root` user in docker images this command is used to change the owner of the node_modules folder
 
-##### windows
+### windows
 Uses `chown -R {user} ./{project}`
 
-##### unix
+### unix
 Uses `sudo chown -R {user}:{user} ./{project}`
 
-### pull request
+## pull request
 Currently available only for Bitbucket projects.
 Try to create pull request for all projects from `master` to `production`
