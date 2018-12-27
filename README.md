@@ -78,30 +78,10 @@ Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` li
 ## npm install
 
 ### locally
-Run `npm i` in all project folders listed in `PROJECTS`.
-
-TODO we need to change this to use `npm i --only=dev` so we would only install packages from devDependencies for IDE.
+Run `npm i --only=dev` in all project folders listed in `PROJECTS`.
 
 ### in docker
-Run `npm i` in all containers. Uses `docker-compose.tty.yml`
-
-```yaml
-# docker-compose.tty.yml
-
-  auth:
-    image: sp_auth
-    command: sh
-    tty: true
-    stdin_open: true
-    volumes:
-    - ./auth:/usr/src/app
-    #WIN- sp-keys-data:/home/node/.ssh/sp/
-    #WIN- auth-node-modules:/usr/src/app/node_modules
-    #LIN- /usr/src/app/node_modules/sp-node-common
-    #LIN- /usr/src/app/node_modules/sp-type-definitions
-    #LIN- ~/.ssh/sp:/home/node/.ssh/sp/
-```
-TODO check if `tty.yml` is needed
+Run `npm i --no-optional` in all containers.
 
 ## npm prepare
 If we use `root` user in docker images this command is used to change the owner of the node_modules folder
