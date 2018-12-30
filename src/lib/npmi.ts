@@ -54,7 +54,7 @@ async function dockerInstall(): Promise<void> {
   shell.cd(global.config.rootDir)
   const promises: any[] = []
   for (const project of global.config.projects) {
-    const cmd = `docker-compose run --rm --no-deps ${project} sh -c "npm i --no-optional"`
+    const cmd = `docker-compose -f docker-compose.tty.yml run --rm --no-deps ${project} sh -c "npm i"`
     const promise = execAsync(cmd).then(result => {
       log(chalk.green(`DONE - ${project}`))
       return { [project]: result }

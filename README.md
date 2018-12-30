@@ -81,7 +81,33 @@ Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` li
 Run `npm i --only=dev` in all project folders listed in `PROJECTS`.
 
 ### in docker
-Run `npm i --no-optional` in all containers.
+Run `npm i` in all containers. Uses `docker-compose.tty.yml`
+
+```yaml
+# docker-compose.tty.yml
+
+  auth:
+    image: sp_auth
+    command: sh
+    tty: true
+    stdin_open: true
+    volumes:
+    - ./auth:/usr/src/app
+    #WIN- sp-keys-data:/home/node/.ssh/sp/
+    #WIN- auth-node-modules:/usr/src/app/node_modules
+    #LIN- /usr/src/app/node_modules/sp-node-common
+    #LIN- /usr/src/app/node_modules/sp-type-definitions
+    #LIN- ~/.ssh/sp:/home/node/.ssh/sp/
+
+#WINvolumes:
+#WIN  sp-keys-data:
+#WIN    external:
+#WIN      name: sp-keys-data
+#WIN  auth-node-modules:
+#WIN    driver: local
+```
+the `docker-compose.tty.yml` is needed to mask the modules so we can install dependencies.
+
 
 ## npm prepare
 If we use `root` user in docker images this command is used to change the owner of the node_modules folder
