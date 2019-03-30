@@ -1,16 +1,18 @@
+import chalk from 'chalk'
 import inquirer from 'inquirer'
 import mainMenu from 'lib/main'
 import { log } from 'lib/util'
-import chalk from 'chalk'
-import request from 'request-promise-native'
 import { assignIn } from 'lodash'
+import request from 'request-promise-native'
 
-export async function run() {
+export async function run(): Promise<void> {
   let username = global.config.git.username
   if (!username) {
-    username = (await inquirer.prompt({ type: 'input', message: 'BitBucket username:', name: 'user' }))['user']
+    // @ts-ignore
+    username = (await inquirer.prompt({ type: 'input', message: 'BitBucket username:', name: 'user' })).user
   }
-  const password = (await inquirer.prompt({ type: 'password', message: 'BitBucket password:', name: 'pass' }))['pass']
+  // @ts-ignore
+  const password = (await inquirer.prompt({ type: 'password', message: 'BitBucket password:', name: 'pass' })).pass
   const Authorization = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
 
   const makePullRequestPromises: any[] = []
@@ -43,7 +45,7 @@ export async function run() {
         }
       })
       .catch(err => {
-        log(chalk.yellow(project + ' - ' + err.message))
+        log(chalk.yellow(`${project} - ${err.message}`))
       })
     makePullRequestPromises.push(promise)
   }
@@ -53,9 +55,8 @@ export async function run() {
   )
 
   if (Object.keys(pullRequestResults).length > 0) {
-    const mergeIt: string = (await inquirer.prompt({ type: 'input', message: 'Merge all (y/N):', name: 'merge' }))[
-      'merge'
-    ].toString()
+    // @ts-ignore
+    const mergeIt: string = (await inquirer.prompt({ type: 'input', message: 'Merge all (y/N):', name: 'merge' })).merge.toString()
     if (mergeIt.toUpperCase() === 'Y') {
       const mergePromises: any[] = []
       for (const [pr, urlMerge] of Object.entries(pullRequestResults)) {

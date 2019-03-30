@@ -1,9 +1,9 @@
-import inquirer, { Answers, ChoiceType, Question } from 'inquirer'
-import { assignIn } from 'lodash'
-import { printMessage } from 'lib/common'
 import chalk from 'chalk'
+import inquirer, { Answers, ChoiceType, Question } from 'inquirer'
+import { printMessage } from 'lib/common'
 import mainMenu from 'lib/main'
 import { execAsync, log } from 'lib/util'
+import { assignIn } from 'lodash'
 
 const cleanMenu: Question<Answers> = {
   type: 'list',
@@ -17,9 +17,9 @@ const cleanMenu: Question<Answers> = {
   ] as ReadonlyArray<ChoiceType>,
 }
 
-export function run() {
+export function run(): void {
   inquirer.prompt(cleanMenu).then(async answers => {
-    switch (answers['clean']) {
+    switch (answers.clean) {
       case 'npm':
         await cleanNpm()
         break
@@ -39,9 +39,9 @@ async function cleanNpm(): Promise<void> {
   const promises: any[] = []
   for (const project of global.config.projects) {
     const cmd = `rm -rf ${global.config.rootDir}/${project}/node_modules/*`
-    const promise = execAsync(cmd).then(result => {
+    const promise = execAsync(cmd).then(execResult => {
       log(chalk.green(`DONE - ${project}`))
-      return { [project]: result }
+      return { [project]: execResult }
     })
     promises.push(promise)
   }

@@ -1,10 +1,10 @@
-import inquirer, { Answers, ChoiceType, Question } from 'inquirer'
-import shell from 'shelljs'
-import { assignIn } from 'lodash'
-import { printMessage } from 'lib/common'
-import { execAsync, log } from 'lib/util'
-import mainMenu from 'lib/main'
 import chalk from 'chalk'
+import inquirer, { Answers, ChoiceType, Question } from 'inquirer'
+import { printMessage } from 'lib/common'
+import mainMenu from 'lib/main'
+import { execAsync, log } from 'lib/util'
+import { assignIn } from 'lodash'
+import shell from 'shelljs'
 
 const gitMenu: Question<Answers> = {
   type: 'list',
@@ -20,16 +20,16 @@ const gitMenu: Question<Answers> = {
   ] as ReadonlyArray<ChoiceType>,
 }
 
-export function run() {
+export function run(): void {
   inquirer.prompt(gitMenu).then(async answers => {
-    switch (answers['git']) {
+    switch (answers.git) {
       case 'clone':
         await clone()
         break
       case 'back':
         return mainMenu()
       default:
-        await gitCommand(answers['git'])
+        await gitCommand(answers.git)
     }
     run()
   })
@@ -39,9 +39,9 @@ async function gitCommand(command): Promise<void> {
   const promises: any[] = []
   for (const project of global.config.projects) {
     const cmd = `git -C ${global.config.rootDir}/${project} ${command}`
-    const promise = execAsync(cmd).then(result => {
+    const promise = execAsync(cmd).then(execResult => {
       log(chalk.green(`DONE - ${project}`))
-      return { [project]: result }
+      return { [project]: execResult }
     })
     promises.push(promise)
   }
@@ -56,9 +56,9 @@ async function clone(): Promise<void> {
     const cmd = `git clone git@${global.config.git.host}:${global.config.git.team}/${
       global.config.git.projectPrefix
     }-${project}.git ${project}`
-    const promise = execAsync(cmd).then(result => {
+    const promise = execAsync(cmd).then(execResult => {
       log(chalk.green(`DONE - ${project}`))
-      return { [project]: result }
+      return { [project]: execResult }
     })
     promises.push(promise)
   }

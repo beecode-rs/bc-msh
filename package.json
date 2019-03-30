@@ -9,25 +9,30 @@
   "dependencies": {
     "app-module-path": "2.2.0",
     "async-shelljs": "0.1.2",
-    "chalk": "2.4.1",
-    "dotenv": "6.2.0",
-    "inquirer": "6.2.1",
+    "chalk": "2.4.2",
+    "compare-versions": "3.4.0",
+    "dotenv": "7.0.0",
+    "inquirer": "6.2.2",
     "lodash": "4.17.11",
     "request": "2.88.0",
-    "request-promise-native": "1.0.5",
+    "request-promise-native": "1.0.7",
     "shelljs": "0.8.3"
   },
   "description": "MicroService Shell helper",
   "devDependencies": {
     "@types/chalk": "2.2.0",
-    "@types/dotenv": "6.1.0",
-    "@types/inquirer": "0.0.43",
-    "@types/lodash": "4.14.119",
+    "@types/compare-versions": "3.0.0",
+    "@types/dotenv": "6.1.1",
+    "@types/inquirer": "6.0.0",
+    "@types/lodash": "4.14.123",
     "@types/request": "2.48.1",
-    "@types/shelljs": "0.8.1",
-    "prettier": "1.15.3",
-    "ts-node": "7.0.1",
-    "typescript": "3.2.2"
+    "@types/shelljs": "0.8.3",
+    "prettier": "1.16.4",
+    "ts-node": "8.0.3",
+    "tsconfig-lint": "0.12.0",
+    "tslint": "5.14.0",
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "3.4.1"
   },
   "homepage": "https://github.com/beecode-rs/bc-msh#readme",
   "keywords": [
@@ -51,5 +56,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w"
   },
-  "version": "0.0.3"
+  "version": "0.0.4"
 }

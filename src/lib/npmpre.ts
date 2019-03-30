@@ -1,9 +1,9 @@
+import chalk from 'chalk'
 import { Answers, ChoiceType, Question } from 'inquirer'
 import inquirer from 'inquirer'
+import { printMessage } from 'lib/common'
 import mainMenu from 'lib/main'
 import { execAsync, log } from 'lib/util'
-import chalk from 'chalk'
-import { printMessage } from 'lib/common'
 import { assignIn } from 'lodash'
 import shell from 'shelljs'
 
@@ -19,9 +19,9 @@ const npmpreMenu: Question<Answers> = {
   ] as ReadonlyArray<ChoiceType>,
 }
 
-export function run() {
+export function run(): void {
   inquirer.prompt(npmpreMenu).then(async answers => {
-    switch (answers['npmpre']) {
+    switch (answers.npmpre) {
       case 'win':
         await prepare('win')
         break
@@ -38,17 +38,19 @@ export function run() {
 }
 
 async function prepare(os: string): Promise<void> {
-  const inputResult = await inquirer.prompt({ type: 'input', message: 'User name:', name: 'user' })
-  const user = inputResult['user']
+  const inputResult = (await inquirer.prompt({ type: 'input', message: 'User name:', name: 'user' })) as {
+    user: string
+  }
+  const user = inputResult.user
   const promises: any[] = []
   for (const project of global.config.projects) {
     const cmd = ` ${os === 'unix' ? 'sudo' : ''} chown -R ${user}${os === 'unix' ? ':' + user : ''} ${
       global.config.rootDir
     }/${project}/node_modules`
     shell.mkdir('-p', `${global.config.rootDir}/${project}/node_modules`)
-    const promise = execAsync(cmd).then(result => {
+    const promise = execAsync(cmd).then(execResult => {
       log(chalk.green(`DONE - ${project}`))
-      return { [project]: result }
+      return { [project]: execResult }
     })
     promises.push(promise)
   }

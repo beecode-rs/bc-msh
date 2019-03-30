@@ -1,5 +1,6 @@
 import { Answers, ChoiceType, Question } from 'inquirer'
 import inquirer from 'inquirer'
+import { log } from 'lib/util'
 
 const mainMenu: Question<Answers> = {
   type: 'list',
@@ -16,32 +17,32 @@ const mainMenu: Question<Answers> = {
   ] as ReadonlyArray<ChoiceType>,
 }
 
-function printEnv() {
-  console.log(`RootDir: ${global.config.rootDir}`)
-  console.log(`Git:`)
-  if (global.config.git.username) console.log(`     username      : ${global.config.git.username}`)
-  console.log(`     team          : ${global.config.git.team}`)
-  console.log(`     host          : ${global.config.git.host}`)
-  console.log(`     project prefix: ${global.config.git.projectPrefix}`)
+function printEnv():void {
+  log(`RootDir: ${global.config.rootDir}`)
+  log(`Git:`)
+  if (global.config.git.username) log(`     username      : ${global.config.git.username}`)
+  log(`     team          : ${global.config.git.team}`)
+  log(`     host          : ${global.config.git.host}`)
+  log(`     project prefix: ${global.config.git.projectPrefix}`)
 
-  console.log(`Project List:`)
-  console.log(`[ ${global.config.projects.join(' | ')} ]`)
+  log(`Project List:`)
+  log(`[ ${global.config.projects.join(' | ')} ]`)
 
   if (global.config.pullRequestSkip && global.config.pullRequestSkip.length > 0) {
-    console.log(`PullRequest skip:`)
-    console.log(`[ ${global.config.pullRequestSkip.join(' | ')} ]`)
+    log(`PullRequest skip:`)
+    log(`[ ${global.config.pullRequestSkip.join(' | ')} ]`)
   }
 
   if (global.config.pullRequestSkip && global.config.dockerBaseImages.length > 0) {
-    console.log(`Docker base images:`)
-    console.log(`[ ${global.config.dockerBaseImages.join(' | ')} ]`)
+    log(`Docker base images:`)
+    log(`[ ${global.config.dockerBaseImages.join(' | ')} ]`)
   }
 }
 
-export default function run() {
+export default function run():void {
   printEnv()
   inquirer.prompt(mainMenu).then(answers => {
-    const selected = answers['mainMenu']
+    const selected = answers.mainMenu
     if (selected === 'exit') return
     require(`lib/${selected}`).run()
   })
