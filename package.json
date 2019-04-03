@@ -12,6 +12,7 @@
     "chalk": "2.4.2",
     "compare-versions": "3.4.0",
     "dotenv": "7.0.0",
+    "fast-json-stable-stringify": "^2.0.0",
     "inquirer": "6.2.2",
     "lodash": "4.17.11",
     "request": "2.88.0",
@@ -23,6 +24,7 @@
     "@types/chalk": "2.2.0",
     "@types/compare-versions": "3.0.0",
     "@types/dotenv": "6.1.1",
+    "@types/fast-json-stable-stringify": "2.0.0",
     "@types/inquirer": "6.0.0",
     "@types/lodash": "4.14.123",
     "@types/request": "2.48.1",
@@ -56,5 +58,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w"
   },
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

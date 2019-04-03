@@ -1,21 +1,18 @@
 import chalk from 'chalk'
 import cVer from 'compare-versions'
+import stringify from 'fast-json-stable-stringify'
 import fs from 'fs'
 import inquirer, { Answers, ChoiceType, Question } from 'inquirer'
-import { printMessage } from 'lib/common'
 import mainMenu from 'lib/main'
-import { execAsync, log } from 'lib/util'
-import { assignIn } from 'lodash'
+import { log } from 'lib/util'
 import * as path from 'path'
-import shell from 'shelljs'
+
 
 const cleanMenu: Question<Answers> = {
   type: 'list',
   name: 'npmi',
   message: 'NPM install action?',
   choices: [
-    { name: 'Locally', value: 'local' },
-    { name: 'In Docker', value: 'docker' },
     { name: 'Global NPM', value: 'global' },
     new inquirer.Separator(),
     { name: 'Go Back', value: 'back' },
@@ -25,12 +22,6 @@ const cleanMenu: Question<Answers> = {
 export function run(): void {
   inquirer.prompt(cleanMenu).then(async answers => {
     switch (answers.npmi) {
-      case 'local':
-        await localInstall()
-        break
-      case 'docker':
-        await dockerInstall()
-        break
       case 'global':
         globalNpm()
         break
@@ -41,35 +32,6 @@ export function run(): void {
     }
     run()
   })
-}
-
-async function localInstall(): Promise<void> {
-  const promises: any[] = []
-  for (const project of global.config.projects) {
-    const cmd = `cd ${global.config.rootDir}/${project} && npm i --only=dev`
-    const promise = execAsync(cmd).then(execResult => {
-      log(chalk.green(`DONE - ${project}`))
-      return { [project]: execResult }
-    })
-    promises.push(promise)
-  }
-  const result = await Promise.all(promises)
-  printMessage(assignIn({}, ...result))
-}
-
-async function dockerInstall(): Promise<void> {
-  shell.cd(global.config.rootDir)
-  const promises: any[] = []
-  for (const project of global.config.projects) {
-    const cmd = `docker-compose -f docker-compose.tty.yml run --rm --no-deps ${project} sh -c "npm i"`
-    const promise = execAsync(cmd).then(execResult => {
-      log(chalk.green(`DONE - ${project}`))
-      return { [project]: execResult }
-    })
-    promises.push(promise)
-  }
-  const result = await Promise.all(promises)
-  printMessage(assignIn({}, ...result))
 }
 
 function globalNpm(): void {
@@ -121,5 +83,5 @@ function globalNpm(): void {
   const globalPackageJs = require(path.join(process.cwd(), `package.json`))
   globalPackageJs.dependencies = gDepsNewer
 
-  fs.writeFileSync('package.json', JSON.stringify(globalPackageJs, null, 4), 'utf8')
+  fs.writeFileSync('package.json', JSON.stringify(JSON.parse(stringify(globalPackageJs)), null, 4), 'utf8')
 }
