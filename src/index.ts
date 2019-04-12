@@ -1,4 +1,9 @@
-import 'app-module-path/register'
-import 'lib/config'
-import mainMenu from 'lib/main'
-mainMenu()
+import '../init'
+
+import { Main } from 'src/main'
+import { util } from 'src/util'
+
+util.printConfig()
+;(async () => {
+  await new Main().run()
+})()

@@ -45,9 +45,6 @@ GIT_USERNAME=gituser@mail.com
   * [docker images](#docker-images)
 * [npm install](#npm-install)
   * [global npm](#global)
-* [npm prepare](#npm-prepare)
-  * [windows](#windows)
-  * [unix](#unix)
 * [pull request](#pull-request)
 
 ## git
@@ -80,15 +77,6 @@ Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` li
 Gathers all npm packages used in all project listed in `PROJECTS`, and stores them into
 package.json located in the master/parent project. Notifies if there are multiple
 versions used for the same package.
-
-## npm prepare
-If we use `root` user in docker images this command is used to change the owner of the node_modules folder
-
-### windows
-Uses `chown -R {user} ./{project}`
-
-### unix
-Uses `sudo chown -R {user}:{user} ./{project}`
 
 ## pull request
 Currently available only for Bitbucket projects.
