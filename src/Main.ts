@@ -9,10 +9,10 @@ export class Main extends MenuBase {
   }
   constructor() {
     super('What do you want to do?', [
-      { name: 'Git', value: 'git' },
-      { name: 'Clean', value: 'clean' },
-      { name: 'NPM', value: 'npm' },
-      { name: 'Pull Request', value: 'pr' },
+      { name: 'Git', value: 'Git' },
+      { name: 'Clean', value: 'Clean' },
+      { name: 'NPM', value: 'NPM' },
+      { name: 'Pull Request', value: 'PR' },
     ] as ChoiceType[])
   }
 }

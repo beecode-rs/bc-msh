@@ -6,8 +6,8 @@ import * as path from 'path'
 import { util } from 'src/util'
 import { SubMenu } from 'src/util/SubMenu'
 
-export = Npm
-class Npm extends SubMenu {
+export = NPM
+class NPM extends SubMenu {
   private async global(): Promise<void> {
     const gDeps = {}
     const gDepsNewer = {}
