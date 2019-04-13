@@ -1,6 +1,6 @@
 import '../init'
 
-import { Main } from 'src/main'
+import { Main } from 'src/Main'
 import { util } from 'src/util'
 
 util.printConfig()

@@ -1,6 +1,6 @@
 import { Answers, ChoiceType, Question } from 'inquirer'
 import inquirer from 'inquirer'
-import { Main } from 'src/main'
+import { Main } from 'src/Main'
 
 export abstract class MenuBase {
   private name = 'menu'
