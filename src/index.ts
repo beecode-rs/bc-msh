@@ -1,9 +1,18 @@
 import '../init'
 
-import { Main } from 'src/Main'
+import minimist from 'minimist'
+import { cli } from 'src/cli'
+import { alias } from 'src/cli/alias'
+import { MainMenu } from 'src/MainMenu'
 import { util } from 'src/util'
 
-util.printConfig()
+const argv = minimist(process.argv.slice(2), { alias })
 ;(async () => {
-  await new Main().run()
+  if (cli.hasArguments(argv)) {
+    if (!argv.help && !argv.init) util.printConfig()
+    await cli.run(argv)
+  } else {
+    util.printConfig()
+    await new MainMenu().run()
+  }
 })()

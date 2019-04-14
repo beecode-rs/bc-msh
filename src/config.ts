@@ -11,7 +11,14 @@ declare namespace NodeJS {
         username: string
       }
       dockerBaseImages: string[]
+      cmd: {
+        gitEnabled: boolean
+        cleanEnabled: boolean
+        npmEnabled: boolean
+        prEnabled: boolean
+      }
     }
+    exitAfterCommandExecuted: boolean
   }
 }
 
@@ -27,6 +34,11 @@ declare namespace NodeJS {
       return def
     }
   }
+  const envToBoolean = (env, def: boolean): boolean => {
+    if ((env || '') === '') return def
+    return env.toLocaleLowerCase() === 'true'
+  }
+
   global.config = Object.freeze({
     rootDir: process.env.ROOT_DIR || process.cwd() || './',
     projects: envToJson('PROJECTS', []),
@@ -38,5 +50,12 @@ declare namespace NodeJS {
       username: process.env.GIT_USERNAME || '',
     },
     dockerBaseImages: envToJson('DOCKER_BASE_IMAGES', []),
+    cmd: {
+      gitEnabled: envToBoolean(process.env.CMD_GIT_ENABLED, true),
+      cleanEnabled: envToBoolean(process.env.CMD_CLEAN_ENABLED, true),
+      npmEnabled: envToBoolean(process.env.CMD_NPM_ENABLED, true),
+      prEnabled: envToBoolean(process.env.CMD_PR_ENABLED, true),
+    },
   })
+  global.exitAfterCommandExecuted = false
 })()

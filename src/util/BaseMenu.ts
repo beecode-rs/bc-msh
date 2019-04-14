@@ -1,8 +1,8 @@
 import { Answers, ChoiceType, Question } from 'inquirer'
 import inquirer from 'inquirer'
-import { Main } from 'src/Main'
+// import { MainMenu as MM } from 'src/MainMenu'
 
-export abstract class MenuBase {
+export abstract class BaseMenu {
   private name = 'menu'
   private type = 'list'
   private message = ''
@@ -10,7 +10,8 @@ export abstract class MenuBase {
 
   private async execute(command): Promise<void> {
     await this[command]()
-    this.run()
+    if (global.exitAfterCommandExecuted) process.exit()
+    await this.run()
   }
 
   constructor(message: string, choices: ChoiceType[], exitChoices?: ChoiceType[]) {
@@ -26,11 +27,20 @@ export abstract class MenuBase {
     } as Question<Answers>
   }
 
-  public async run(): Promise<void> {
-    const answers = await inquirer.prompt(this.menu)
-    const selected = answers[this.name]
-    if (selected === 'exit') process.exit()
-    if (selected === 'main') return new Main().run()
-    this.execute(selected)
+  public async run(preSelected?: string): Promise<void> {
+    let selected: string
+    if (preSelected) {
+      selected = preSelected
+    } else {
+      const answers = await inquirer.prompt(this.menu)
+      selected = answers[this.name]
+    }
+    switch (selected) {
+      case 'exit':
+        process.exit()
+        break
+      default:
+        await this.execute(selected)
+    }
   }
 }
