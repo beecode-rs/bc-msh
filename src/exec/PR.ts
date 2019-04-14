@@ -8,6 +8,7 @@ import { SubMenu } from 'src/util/SubMenu'
 export = PullRequest
 class PullRequest extends SubMenu {
   private async createMergePR(): Promise<void> {
+    // TODO split into multiple functions
     let username = global.config.git.username
     if (!username) {
       // @ts-ignore

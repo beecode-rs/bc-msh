@@ -7,6 +7,10 @@ import { SubMenu } from 'src/util/SubMenu'
 
 export = Clean
 class Clean extends SubMenu {
+
+  /**
+   * Remove content from node_modules folder located in all microservice projects
+   */
   private async npm(): Promise<void> {
     const promises: any[] = []
     for (const project of global.config.projects) {
@@ -21,6 +25,10 @@ class Clean extends SubMenu {
     common.printMessage(assignIn({}, ...result))
   }
 
+  /**
+   * Remove all images created for all microservices in this project, including global docker images.
+   * Before removing all images run `docker-compose down` to remove all containers
+   */
   private async docker(): Promise<void> {
     for (const image of [
       ...global.config.projects.map(proj => `${global.config.git.projectPrefix}_${proj}`),

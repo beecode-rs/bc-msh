@@ -30,17 +30,20 @@ class Git extends SubMenu {
     ] as ChoiceType[])
   }
 
-  public async status(): Promise<void> {
+  private async status(): Promise<void> {
     await this.gitCommand('status')
   }
-  public async fetch(): Promise<void> {
+  private async fetch(): Promise<void> {
     await this.gitCommand('fetch')
   }
-  public async pull(): Promise<void> {
+  private async pull(): Promise<void> {
     await this.gitCommand('pull')
   }
 
-  public async clone(): Promise<void> {
+  /**
+   * Clone all project for microservices that belong to parent project
+   */
+  private async clone(): Promise<void> {
     shell.cd(global.config.rootDir)
     const promises: any[] = []
     for (const project of global.config.projects) {

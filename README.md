@@ -49,34 +49,35 @@ GIT_USERNAME=gituser@mail.com
   * npm
   * docker images
 * [npm](#npm)
-  * global npm
+  * global
 * [pull request](#pull-request)
+  * create/merge
 
 ### git
 Perform git commands on all project specified in `.mas` config file under `PROJECTS`. All commands are executed asynchronously.
 
-* **status** Get git status for all microservice projects
+* **status** - Get git status for all microservice projects
 
-* **fetch** Perform git fetch for all microservice projects
+* **fetch** - Perform git fetch for all microservice projects
 
-* **pull** Perform git pull for all microservice projects
+* **pull** - Perform git pull for all microservice projects
 
-* **clone** Clone all microservice projects. If `GIT_PROJECT_PREFIX` is set the project prefix is going to be striped for all projects.
+* **clone** - Clone all microservice projects. If `GIT_PROJECT_PREFIX` is set the project prefix is going to be striped for all projects.
 
 ### clean
 Removes files, folder and docker images.
 
-* **npm** Remove `node_modules` folder from microservice projects.
+* **npm** - Remove `node_modules` folder from microservice projects.
 
-* **docker images** Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` list
+* **docker images** - Remove docker images for microservice and base images in `DOCKER_BASE_IMAGES` list
 
 ### npm
 
-* **global** Gathers all npm packages used in all project listed in `PROJECTS`, and stores them into package.json located in the master/parent project. Notifies if there are multiple versions used for the same package.
+* **global** - Gathers all npm packages used in all project listed in `PROJECTS`, and stores them into package.json located in the master/parent project. Notifies if there are multiple versions used for the same package.
 
 ### pull request
 
-Currently available only for Bitbucket projects. Try to create pull request for all projects from `master` to `production`
+* **create/merge** - Currently available only for Bitbucket projects. Try to create pull request for all projects from `master` to `production`
 
 
 # CLI

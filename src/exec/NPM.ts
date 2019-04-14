@@ -8,6 +8,14 @@ import { SubMenu } from 'src/util/SubMenu'
 
 export = NPM
 class NPM extends SubMenu {
+
+  constructor() {
+    super('NPM action?', [{ name: 'Global NPM', value: 'global' }] as ChoiceType[])
+  }
+
+  /**
+   * Gather all npm packages into one package.json located in parent project.
+   */
   private async global(): Promise<void> {
     const gDeps = {}
     const gDepsNewer = {}
@@ -58,9 +66,5 @@ class NPM extends SubMenu {
     globalPackageJs.dependencies = gDepsNewer
 
     fs.writeFileSync('package.json', JSON.stringify(JSON.parse(stringify(globalPackageJs)), null, 4), 'utf8')
-  }
-
-  constructor() {
-    super('NPM action?', [{ name: 'Global NPM', value: 'global' }] as ChoiceType[])
   }
 }

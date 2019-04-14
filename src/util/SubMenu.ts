@@ -7,7 +7,7 @@ export abstract class SubMenu extends BaseMenu {
   private async mainMenu(): Promise<void> {
     await new MainMenu().run()
   }
-  constructor(message: string, choices: ChoiceType[]) {
+  protected constructor(message: string, choices: ChoiceType[]) {
     super(message, choices, [{ name: 'Go Back', value: 'mainMenu' }])
   }
 
