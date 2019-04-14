@@ -24,31 +24,30 @@ const util = {
     /* tslint:enable */
   },
   printConfig: (): void => {
-    util.log(`RootDir: ${chalk.cyan(global.config.rootDir)}`)
-    util.log(`Git:`)
-    if (global.config.git.username) {
-      util.log(`     username : ${chalk.cyan(global.config.git.username)}`)
-    }
-    util.log(`     team     : ${chalk.cyan(global.config.git.team)}`)
-    util.log(`     host     : ${chalk.cyan(global.config.git.host)}`)
-    util.log(`     prefix   : ${chalk.cyan(global.config.git.projectPrefix)}`)
-    util.log('')
+    const gitUserName = global.config.git.username ? `     username : ${chalk.cyan(global.config.git.username)}` : ``
+    const pullRequestSkip =
+      global.config.pullRequestSkip && global.config.pullRequestSkip.length > 0
+        ? `PullRequest skip:\n[ ${chalk.cyan(global.config.pullRequestSkip.join(chalk.white(' | ')))} ]\n`
+        : ``
+    const dockerBaseImages =
+      global.config.dockerBaseImages && global.config.dockerBaseImages.length > 0
+        ? `Docker base images:\\n[ ${chalk.cyan(global.config.dockerBaseImages.join(chalk.white(' | ')))} ]\n`
+        : ``
 
-    util.log(`Project List:`)
-    util.log(`[ ${chalk.cyan(global.config.projects.join(chalk.white(' | ')))} ]`)
-    util.log('')
+    util.log(`
+RootDir: ${chalk.cyan(global.config.rootDir)}
+Git:
+${gitUserName}
+     team     : ${chalk.cyan(global.config.git.team)}
+     host     : ${chalk.cyan(global.config.git.host)}
+     prefix   : ${chalk.cyan(global.config.git.projectPrefix)}
 
-    if (global.config.pullRequestSkip && global.config.pullRequestSkip.length > 0) {
-      util.log(`PullRequest skip:`)
-      util.log(`[ ${chalk.cyan(global.config.pullRequestSkip.join(chalk.white(' | ')))} ]`)
-      util.log('')
-    }
+Project List:
+[ ${chalk.cyan(global.config.projects.join(chalk.white(' | ')))} ]
 
-    if (global.config.pullRequestSkip && global.config.dockerBaseImages.length > 0) {
-      util.log(`Docker base images:`)
-      util.log(`[ ${chalk.cyan(global.config.dockerBaseImages.join(chalk.white(' | ')))} ]`)
-      util.log('')
-    }
+${pullRequestSkip}
+${dockerBaseImages}
+`)
   },
 }
 export { util }
