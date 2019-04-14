@@ -23,8 +23,7 @@ const util = {
     }
     /* tslint:enable */
   },
-
-  printConfig(): void {
+  printConfig: (): void => {
     util.log(`RootDir: ${chalk.cyan(global.config.rootDir)}`)
     util.log(`Git:`)
     if (global.config.git.username) {

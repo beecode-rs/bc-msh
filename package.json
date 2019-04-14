@@ -60,11 +60,12 @@
     "build": "tsc",
     "clean": "rm -rf ./dist/*",
     "debug": "node --inspect -r ts-node/register ./src/index.ts",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" \"src/**/*.json\"",
     "prebuild": "npm run clean",
     "prewatch": "npm run clean",
     "start": "ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w"
   },
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

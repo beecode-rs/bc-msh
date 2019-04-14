@@ -1,5 +1,7 @@
 declare namespace NodeJS {
   interface Global {
+    projectName: string
+    projectVersion: string
     config: {
       rootDir: string
       projects: string[]
@@ -24,6 +26,7 @@ declare namespace NodeJS {
 
 ;(() => {
   const dotenv = require('dotenv')
+  const pjson = require('../../package.json')
   dotenv.config({ path: './.msh' })
   dotenv.config({ path: './.msh-user' })
 
@@ -39,6 +42,8 @@ declare namespace NodeJS {
     return env.toLocaleLowerCase() === 'true'
   }
 
+  global.projectName = pjson.name
+  global.projectVersion = pjson.version
   global.config = Object.freeze({
     rootDir: process.env.ROOT_DIR || process.cwd() || './',
     projects: envToJson('PROJECTS', []),

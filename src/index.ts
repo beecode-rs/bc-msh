@@ -9,7 +9,7 @@ import { util } from 'src/util'
 const argv = minimist(process.argv.slice(2), { alias })
 ;(async () => {
   if (cli.hasArguments(argv)) {
-    if (!argv.help && !argv.init) util.printConfig()
+    if (cli.allowPrintConfigForCmd(argv)) util.printConfig()
     await cli.run(argv)
   } else {
     util.printConfig()

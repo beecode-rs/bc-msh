@@ -5,12 +5,12 @@ import { util } from 'src/util'
 const init = {
   configFileLocation: () => path.join(global.config.rootDir, '.msh'),
   checkIfConfigExists: () => fs.existsSync(init.configFileLocation()),
-  create: async () => {
-    if(init.checkIfConfigExists()){
+  create: () => {
+    if (init.checkIfConfigExists()) {
       util.log('Config already exists')
       return
     }
-    fs.writeFileSync(init.configFileLocation(),init.default())
+    fs.writeFileSync(init.configFileLocation(), init.default())
   },
   default: () => {
     return `
@@ -25,8 +25,7 @@ CMD_CLEAN_ENABLED=true
 CMD_NPM_ENABLED=true
 CMD_PR_ENABLED=true
 `
-  }
-
+  },
 }
 
 export { init }
