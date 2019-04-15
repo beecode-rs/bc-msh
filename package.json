@@ -16,9 +16,11 @@
     "inquirer": "6.2.2",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
+    "mz": "2.7.0",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
-    "shelljs": "0.8.3"
+    "shelljs": "0.8.3",
+    "source-map-support": "0.5.12"
   },
   "description": "MicroService Shell helper",
   "devDependencies": {
@@ -32,9 +34,7 @@
     "@types/mz": "0.0.32",
     "@types/request": "2.48.1",
     "@types/shelljs": "0.8.3",
-    "mz": "2.7.0",
     "prettier": "1.16.4",
-    "source-map-support": "0.5.12",
     "ts-node": "8.0.3",
     "tsconfig-lint": "0.12.0",
     "tslint": "5.14.0",
