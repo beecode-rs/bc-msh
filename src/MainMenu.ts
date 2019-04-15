@@ -9,7 +9,7 @@ export class MainMenu extends BaseMenu {
   }
   constructor() {
     const menuItems: { name: string; value: string }[] = []
-    if (!global.config.cmd.gitEnabled) menuItems.push({ name: 'Git', value: 'Git' })
+    if (global.config.cmd.gitEnabled) menuItems.push({ name: 'Git', value: 'Git' })
     if (global.config.cmd.cleanEnabled) menuItems.push({ name: 'Clean', value: 'Clean' })
     if (global.config.cmd.npmEnabled) menuItems.push({ name: 'NPM', value: 'NPM' })
     if (global.config.cmd.prEnabled) menuItems.push({ name: 'Pull Request', value: 'PR' })
