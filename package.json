@@ -67,5 +67,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w"
   },
-  "version": "0.1.2"
+  "version": "0.1.4"
 }
