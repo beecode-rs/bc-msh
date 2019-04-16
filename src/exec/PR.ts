@@ -20,7 +20,6 @@ class PR extends SubMenu {
       password = (await inquirer.prompt({ type: 'password', message: 'BitBucket password:', name: 'pass' })).pass
     }
     const Authorization = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
-    console.log(Authorization)
 
     const makePullRequestPromises: any[] = []
     for (const project of global.config.projects) {
