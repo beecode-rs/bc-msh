@@ -5,18 +5,22 @@ import request from 'request-promise-native'
 import { util } from 'src/util'
 import { SubMenu } from 'src/util/SubMenu'
 
-export = PullRequest
-class PullRequest extends SubMenu {
+export = PR
+class PR extends SubMenu {
   private async createMergePR(): Promise<void> {
     // TODO split into multiple functions
     let username = global.config.git.username
+    let password = global.config.git.password
     if (!username) {
       // @ts-ignore
       username = (await inquirer.prompt({ type: 'input', message: 'BitBucket username:', name: 'user' })).user
     }
-    // @ts-ignore
-    const password = (await inquirer.prompt({ type: 'password', message: 'BitBucket password:', name: 'pass' })).pass
+    if(!password) {
+      // @ts-ignore
+      password = (await inquirer.prompt({ type: 'password', message: 'BitBucket password:', name: 'pass' })).pass
+    }
     const Authorization = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
+    console.log(Authorization)
 
     const makePullRequestPromises: any[] = []
     for (const project of global.config.projects) {

@@ -31,7 +31,7 @@ const util = {
         : ``
     const dockerBaseImages =
       global.config.dockerBaseImages && global.config.dockerBaseImages.length > 0
-        ? `Docker base images:\\n[ ${chalk.cyan(global.config.dockerBaseImages.join(chalk.white(' | ')))} ]\n`
+        ? `Docker base images:\n[ ${chalk.cyan(global.config.dockerBaseImages.join(chalk.white(' | ')))} ]\n`
         : ``
 
     util.log(`

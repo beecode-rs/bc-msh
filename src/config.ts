@@ -11,6 +11,7 @@ declare namespace NodeJS {
         projectPrefix: string
         host: string
         username: string
+        password: string
       }
       dockerBaseImages: string[]
       cmd: {
@@ -53,6 +54,7 @@ declare namespace NodeJS {
       projectPrefix: process.env.GIT_PROJECT_PREFIX || '',
       host: process.env.GIT_HOST || 'bitbucket.org',
       username: process.env.GIT_USERNAME || '',
+      password: process.env.GIT_PASSWORD || '',
     },
     dockerBaseImages: envToJson('DOCKER_BASE_IMAGES', []),
     cmd: {
