@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { ChoiceType } from 'inquirer'
+import { ChoiceCollection } from 'inquirer'
 import { assignIn } from 'lodash'
 import shell from 'shelljs'
 import { common } from 'src/common'
@@ -27,7 +27,7 @@ class Git extends SubMenu {
       { name: 'Fetch', value: 'fetch' },
       { name: 'Pull', value: 'pull' },
       { name: 'Clone', value: 'clone' },
-    ] as ChoiceType[])
+    ] as ChoiceCollection)
   }
 
   private async status(): Promise<void> {

@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { ChoiceType } from 'inquirer'
+import { ChoiceCollection } from 'inquirer'
 import { assignIn } from 'lodash'
 import { common } from 'src/common'
 import { util } from 'src/util'
@@ -41,6 +41,6 @@ class Clean extends SubMenu {
     }
   }
   constructor() {
-    super('Clean action?', [{ name: 'NPM', value: 'npm' }, { name: 'Docker Images', value: 'docker' }] as ChoiceType[])
+    super('Clean action?', [{ name: 'NPM', value: 'npm' }, { name: 'Docker Images', value: 'docker' }] as ChoiceCollection)
   }
 }

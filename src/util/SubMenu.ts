@@ -1,4 +1,4 @@
-import { ChoiceType } from 'inquirer'
+import { ChoiceCollection } from 'inquirer'
 import { MainMenu } from 'src/MainMenu'
 import { BaseMenu } from 'src/util/BaseMenu'
 import { util } from 'src/util/index'
@@ -7,7 +7,7 @@ export abstract class SubMenu extends BaseMenu {
   private async mainMenu(): Promise<void> {
     await new MainMenu().run()
   }
-  protected constructor(message: string, choices: ChoiceType[]) {
+  protected constructor(message: string, choices: ChoiceCollection) {
     super(message, choices, [{ name: 'Go Back', value: 'mainMenu' }])
   }
 

@@ -1,4 +1,4 @@
-import { ChoiceType } from 'inquirer'
+import { ChoiceCollection } from 'inquirer'
 import { BaseMenu } from 'src/util/BaseMenu'
 
 // @ts-ignore
@@ -13,6 +13,6 @@ export class MainMenu extends BaseMenu {
     if (global.config.cmd.cleanEnabled) menuItems.push({ name: 'Clean', value: 'Clean' })
     if (global.config.cmd.npmEnabled) menuItems.push({ name: 'NPM', value: 'NPM' })
     if (global.config.cmd.prEnabled) menuItems.push({ name: 'Pull Request', value: 'PR' })
-    super('What do you want to do?', menuItems as ChoiceType[])
+    super('What do you want to do?', menuItems as ChoiceCollection)
   }
 }

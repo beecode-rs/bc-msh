@@ -1,7 +1,7 @@
 import cVer from 'compare-versions'
 import stringify from 'fast-json-stable-stringify'
 import fs from 'fs'
-import { ChoiceType } from 'inquirer'
+import { ChoiceCollection } from 'inquirer'
 import * as path from 'path'
 import { util } from 'src/util'
 import { SubMenu } from 'src/util/SubMenu'
@@ -10,7 +10,7 @@ export = NPM
 class NPM extends SubMenu {
 
   constructor() {
-    super('NPM action?', [{ name: 'Global NPM', value: 'global' }] as ChoiceType[])
+    super('NPM action?', [{ name: 'Global NPM', value: 'global' }] as ChoiceCollection)
   }
 
   /**

@@ -1,11 +1,11 @@
-import { Answers, ChoiceType, Question } from 'inquirer'
+import { Answers, ChoiceCollection, QuestionCollection } from 'inquirer'
 import inquirer from 'inquirer'
 
 export abstract class BaseMenu {
   private name = 'menu'
   private type = 'list'
   private message: string
-  private menu: Question<Answers>
+  private menu: QuestionCollection<Answers>
 
   private async execute(command): Promise<void> {
     await this[command]()
@@ -13,7 +13,7 @@ export abstract class BaseMenu {
     await this.run()
   }
 
-  protected constructor(message: string, choices: ChoiceType[], exitChoices?: ChoiceType[]) {
+  protected constructor(message: string, choices: ChoiceCollection, exitChoices?: ChoiceCollection) {
     if (message) this.message = message
     choices.push(new inquirer.Separator())
     for (const choice of exitChoices || []) choices.push(choice)
@@ -23,7 +23,7 @@ export abstract class BaseMenu {
       name: this.name,
       message: this.message,
       choices: [...choices],
-    } as Question<Answers>
+    } as QuestionCollection<Answers>
   }
 
   public async run(preSelected?: string): Promise<void> {

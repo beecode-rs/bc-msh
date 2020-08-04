@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import inquirer, { ChoiceType } from 'inquirer'
+import inquirer, { ChoiceCollection } from 'inquirer'
 import { assignIn } from 'lodash'
 import request from 'request-promise-native'
 import { util } from 'src/util'
@@ -60,7 +60,7 @@ class PR extends SubMenu {
       ...(await Promise.all(makePullRequestPromises)).filter(pr => typeof pr !== 'undefined')
     )
 
-    if (Object.keys(pullRequestResults).length > 0) {
+    if (Object.keys(pullRequestResults as any).length > 0) {
       const mergeIt: string = (await inquirer.prompt({
         type: 'input',
         message: 'Merge all (y/N):',
@@ -69,7 +69,7 @@ class PR extends SubMenu {
       })).merge.toString()
       if (mergeIt.toUpperCase() === 'Y') {
         const mergePromises: any[] = []
-        for (const [pr, urlMerge] of Object.entries(pullRequestResults)) {
+        for (const [pr, urlMerge] of Object.entries(pullRequestResults as any)) {
           const mergePromise = request(urlMerge, {
             method: 'POST',
             headers: { Authorization },
@@ -84,6 +84,6 @@ class PR extends SubMenu {
   }
 
   constructor() {
-    super('Pull Request action?', [{ name: 'Create / Merge PR', value: 'createMergePR' }] as ChoiceType[])
+    super('Pull Request action?', [{ name: 'Create / Merge PR', value: 'createMergePR' }] as ChoiceCollection)
   }
 }
