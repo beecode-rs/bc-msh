@@ -14,7 +14,7 @@
     "dotenv": "8.2.0",
     "fast-json-stable-stringify": "^2.1.0",
     "inquirer": "7.3.3",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "minimist": "1.2.5",
     "mz": "2.7.0",
     "request": "2.88.2",
